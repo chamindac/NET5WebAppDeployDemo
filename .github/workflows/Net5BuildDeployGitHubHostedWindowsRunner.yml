@@ -17,7 +17,7 @@ jobs:
       run: dotnet build  .\mynet5app\mynet5app.csproj --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish .\mynet5app\mynet5app.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      run: dotnet publish .\mynet5app\mynet5app.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp --no-build --no-restore
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
