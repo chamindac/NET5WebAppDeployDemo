@@ -22,7 +22,7 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
       with:
-        app-name: 'app-githubact-emo'
+        app-name: 'app-githubact-demo'
         slot-name: 'production'
         publish-profile: ${{ secrets.MYNET5WEBAPPPUBLISHPROFILE }}
         package: ${{env.DOTNET_ROOT}}/myapp 
