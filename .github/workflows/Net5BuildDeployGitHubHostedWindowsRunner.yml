@@ -1,1 +1,28 @@
-On:[workflow_dispathc]
+on: [workflow_dispatch]
+name: Net5BuildDeployGitHubHostedWindowsRunner
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.100'
+
+    - name: Build with dotnet
+      run: dotnet build  .\mynet5app\mynet5app.csproj --configuration Release
+
+    - name: dotnet publish
+      run: dotnet build  .\mynet5app\mynet5app.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v1
+      with:
+        app-name: 'app-githubact-emo'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.MYNET5WEBAPPPUBLISHPROFILE }}
+        package: ${{env.DOTNET_ROOT}}/myapp 
