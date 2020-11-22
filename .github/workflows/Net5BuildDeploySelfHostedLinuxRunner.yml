@@ -14,10 +14,10 @@ jobs:
         dotnet-version: '5.0.100'
 
     - name: Build with dotnet
-      run: dotnet build  .\mynet5app\mynet5app.csproj --configuration Release
+      run: dotnet build  **/mynet5app.csproj --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish .\mynet5app\mynet5app.csproj -c Release -o ${{env.DOTNET_ROOT}}\myapp --no-build --no-restore
+      run: dotnet publish **/mynet5app.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp --no-build --no-restore
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
@@ -25,4 +25,4 @@ jobs:
         app-name: 'app-githubact-demo'
         slot-name: 'production'
         publish-profile: ${{ secrets.MYNET5WEBAPPPUBLISHPROFILE }}
-        package: ${{env.DOTNET_ROOT}}\myapp
+        package: ${{env.DOTNET_ROOT}}/myapp
