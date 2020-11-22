@@ -3,7 +3,7 @@ name: Net5BuildDeploySelfHostedWindowsRunner
 
 jobs:
   build-and-deploy:
-    runs-on: mywin10demorunner
+    runs-on: win10demorunner
 
     steps:
     - uses: actions/checkout@master
